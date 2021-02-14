@@ -49,11 +49,6 @@ abstract class PixivBase
     /**
      * @var null
      */
-    protected $refresh_token = null;
-
-    /**
-     * @var null
-     */
     protected $authorization_response = null;
 
     public function __construct()
@@ -95,7 +90,6 @@ abstract class PixivBase
         $this->setAuthorizationResponse($result);
         if (!isset($result->has_error) && isset($result->response)) {
             $this->setAccessToken($result->response->access_token);
-            $this->setRefreshToken($result->response->refresh_token);
         }
     }
 
