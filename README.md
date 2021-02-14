@@ -1,39 +1,9 @@
 # pixiv-api-php
 
-[![Build Status](https://api.travis-ci.org/kokororin/pixiv-api-php.svg)](https://travis-ci.org/kokororin/pixiv-api-php) 
-[![Packagist](https://img.shields.io/packagist/dt/kokororin/pixiv-api-php.svg?maxAge=2592000)](https://packagist.org/packages/kokororin/pixiv-api-php)
+基于 [kokororin/pixiv-api-php](https://github.com/kokororin/pixiv-api-php), 在此基础上进行了一些修复与更新
 
-_Pixiv API for PHP (with Auth supported)_
+本项目仅留档，不开放 issue，需要更完整的功能推荐使用 [pixivpy](https://github.com/upbit/pixivpy)
 
-### Installation
+使用示例请查看 [example.php](https://github.com/xb2016/pixiv-api-php/blob/master/example.php)
 
-~~~bash
-composer require kokororin/pixiv-api-php:dev-master
-~~~
-
-### Example:
-~~~php
-require './vendor/autoload.php';
-
-$api = new PixivAppAPI;
-# running some methods
-$api->method();
-~~~
-
-## Tests
-
-To execute the test suite, you'll need phpunit.
-
-```bash
-$ PIXIV_USERNAME=XXX PIXIV_PASSWORD=XXX composer test
-```
-
-## API
-
-### PixivAppAPI
-**ALL METHODS need authentication.**  
-See [PixivAppAPI.php](https://github.com/kokororin/pixiv-api-php/blob/master/PixivAppAPI.php) or [PixivAppAPITest.php](https://github.com/kokororin/pixiv-api-php/blob/master/tests/PixivAppAPITest.php) for detail usage.
-
-### PixivAPI (**deprecated**)
-**Some methods need authentication.**  
-See [PixivAPI.php](https://github.com/kokororin/pixiv-api-php/blob/master/PixivAPI.php) or [PixivAPITest.php](https://github.com/kokororin/pixiv-api-php/blob/master/tests/PixivAPITest.php) for detail usage.
+更多信息请查看 [PixivAPI.php](https://github.com/xb2016/pixiv-api-php/blob/master/vendor/kokororin/pixiv-api-php/PixivAPI.php) 与 [PixivAppAPI.php](https://github.com/xb2016/pixiv-api-php/blob/master/vendor/kokororin/pixiv-api-php/PixivAppAPI.php)

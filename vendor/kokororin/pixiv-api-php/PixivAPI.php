@@ -22,7 +22,6 @@ class PixivAPI extends PixivBase
      */
     protected $headers = array(
         'Host' => 'public-api.secure.pixiv.net',
-        'Authorization' => 'Bearer WHDWCGnwWA2C8PRfQSdXJxjXp0G6ULRaRkkd6t5B6h8',
         'User-Agent' => 'PixivIOSApp/5.8.3',
     );
 
@@ -439,6 +438,8 @@ class PixivAPI extends PixivBase
      * @param $period
      * @param $order
      * @param $sort
+     *   date - 时间
+     *   popular - 热门度
      * @param array $types
      * @param array $image_sizes
      * @param $include_stats
@@ -447,8 +448,8 @@ class PixivAPI extends PixivBase
      */
     public function search_works($query, $page = 1, $per_page = 30, $mode = 'text',
         $period = 'all', $order = 'desc', $sort = 'date',
-        $types = array('illustration', 'manga', 'ugoira'),
-        $image_sizes = array('px_128x128', 'px_480mw', 'large'),
+        $types = 'illustration,manga,ugoira',
+        $image_sizes = 'px_128x128,px_480mw,large',
         $include_stats = true, $include_sanity_level = true) {
         return $this->fetch('/v1/search/works.json', array(
             'method' => 'get',
@@ -461,10 +462,10 @@ class PixivAPI extends PixivBase
                 'order' => $order,
                 'sort' => $sort,
                 'mode' => $mode,
-                'types' => implode(',', $types),
+                'types' => $types,
                 'include_stats' => $include_stats,
                 'include_sanity_level' => $include_sanity_level,
-                'image_sizes' => implode(',', $image_sizes),
+                'image_sizes' => $image_sizes,
             ),
         ));
     }

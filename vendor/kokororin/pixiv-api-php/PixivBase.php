@@ -14,7 +14,6 @@ use Curl\Curl;
 
 abstract class PixivBase
 {
-
     /**
      * @var string
      */
@@ -24,7 +23,7 @@ abstract class PixivBase
      * @var array
      */
     protected $headers = array(
-        'Authorization' => 'Bearer WHDWCGnwWA2C8PRfQSdXJxjXp0G6ULRaRkkd6t5B6h8',
+        'Accept-Language' => 'zh_CN',
     );
 
     /**
@@ -67,48 +66,37 @@ abstract class PixivBase
     /**
      * ログイン
      *
-     * @param $user
-     * @param $pwd
      * @param $refresh_token
      */
-    public function login($user = null, $pwd = null, $refresh_token = null)
+    public function login($refresh_token = null)
     {
-        $local_time = date('Y-m-d') . 'T' . date('H:i:s+00:00');
+        $local_time = date('Y-m-d') . 'T' . date('H:i:s+08:00');
         $request = array(
             'client_id' => $this->oauth_client_id,
             'client_secret' => $this->oauth_client_secret,
-            'get_secure_url' => 1,
+            'get_secure_url' => true,
+            'include_policy' => true,
+            'grant_type' => 'refresh_token',
+            'refresh_token' => $refresh_token ? $refresh_token : $this->refresh_token,
         );
-        if ($user != null && $pwd != null) {
-            $request = array_merge($request, array(
-                'username' => $user,
-                'password' => $pwd,
-                'grant_type' => 'password',
-            ));
-        } elseif ($refresh_token != null || $this->refresh_token != null) {
-            $request = array_merge($request, array(
-                'grant_type' => 'refresh_token',
-                'refresh_token' => $refresh_token || $this->refresh_token,
-            ));
-        } else {
-            throw new Exception('login params error.');
-        }
         $curl = new Curl();
         $curl->setOpt(CURLOPT_CONNECTTIMEOUT, 10);
         $curl->setOpt(CURLOPT_SSL_VERIFYHOST, 0);
         $curl->setOpt(CURLOPT_SSL_VERIFYPEER, 0);
-        $curl->setHeader('User-Agent', 'PixivAndroidApp/5.0.64 (Android 6.0)');
+        $curl->setHeader('User-Agent', 'PixivAndroidApp/5.0.200 (Android 10; MI 8 UD)');
+        $curl->setHeader('App-OS', 'android');
+        $curl->setHeader('App-OS-Version', '10');
+        $curl->setHeader('App-Version', '5.0.200');
         $curl->setHeader('X-Client-Time', $local_time);
         $curl->setHeader('X-Client-Hash', md5($local_time . $this->hash_secret));
         $curl->post($this->oauth_url, $request);
         $result = $curl->response;
         $curl->close();
-        if (isset($result->has_error)) {
-            throw new Exception('Login error: ' . $result->errors->system->message);
+        $this->setAuthorizationResponse($result);
+        if (!isset($result->has_error) && isset($result->response)) {
+            $this->setAccessToken($result->response->access_token);
+            $this->setRefreshToken($result->response->refresh_token);
         }
-        $this->setAuthorizationResponse($result->response);
-        $this->setAccessToken($result->response->access_token);
-        $this->setRefreshToken($result->response->refresh_token);
     }
 
     /**
@@ -130,26 +118,6 @@ abstract class PixivBase
     {
         $this->access_token = $access_token;
         $this->headers['Authorization'] = 'Bearer ' . $access_token;
-    }
-
-    /**
-     * Refresh Token 取得する
-     *
-     * @return string
-     */
-    public function getRefreshToken()
-    {
-        return $this->refresh_token;
-    }
-
-    /**
-     * Refresh Token セット
-     *
-     * @param $refresh_token
-     */
-    public function setRefreshToken($refresh_token)
-    {
-        $this->refresh_token = $this->refresh_token;
     }
 
     /**

@@ -1,0 +1,111 @@
+[
+    {
+        "name": "kokororin/pixiv-api-php",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kokororin/pixiv-api-php.git",
+            "reference": "b01781400859d4f4d572910f167440000462686d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kokororin/pixiv-api-php/zipball/b01781400859d4f4d572910f167440000462686d",
+            "reference": "b01781400859d4f4d572910f167440000462686d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3",
+            "php-curl-class/php-curl-class": "^7.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.0"
+        },
+        "time": "2020-01-02T09:26:07+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "PixivBase.php",
+                "PixivAPI.php",
+                "PixivAppAPI.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Sora",
+                "homepage": "https://github.com/kokororin/pixiv-api-php"
+            }
+        ],
+        "description": "Pixiv API for PHP (with Auth supported) ",
+        "homepage": "https://github.com/kokororin/pixiv-api-php",
+        "keywords": [
+            "Pixiv",
+            "api",
+            "php"
+        ]
+    },
+    {
+        "name": "php-curl-class/php-curl-class",
+        "version": "7.4.0",
+        "version_normalized": "7.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-curl-class/php-curl-class.git",
+            "reference": "c15f23ce5d52a4c68b69640ed6510a9d2a98ec6f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/c15f23ce5d52a4c68b69640ed6510a9d2a98ec6f",
+            "reference": "c15f23ce5d52a4c68b69640ed6510a9d2a98ec6f",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*",
+            "squizlabs/php_codesniffer": "*"
+        },
+        "time": "2017-09-04T21:38:09+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Curl\\": "src/Curl/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Unlicense"
+        ],
+        "authors": [
+            {
+                "name": "Zach Borboa"
+            }
+        ],
+        "description": "PHP Curl Class makes it easy to send HTTP requests and integrate with web APIs.",
+        "homepage": "https://github.com/php-curl-class/php-curl-class",
+        "keywords": [
+            "api",
+            "class",
+            "client",
+            "curl",
+            "framework",
+            "http",
+            "http client",
+            "json",
+            "php",
+            "requests",
+            "rest",
+            "restful",
+            "web service",
+            "xml"
+        ]
+    }
+]
